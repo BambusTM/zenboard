@@ -2,71 +2,19 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
 }
 
+model Post {
+    id        Int      @id @default(autoincrement())
+    name      String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
-// USER
-
-model User {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  email     String   @unique
-  name      String?
-  role      Role     @default(USER)
-
-  stickies  StickyNote[]
-  feedbacks Feedback[]
-  votes     Vote[]
-}
-
-enum Role {
-  USER
-  ADMIN
-}
-
-
-// BOARD
-
-model Board {
-  id        String       @id @default(cuid())
-  name      String
-  createdAt DateTime     @default(now())
-  stickies  StickyNote[]
-}
-
-model StickyNote {
-  id        String   @id @default(cuid())
-  content   String
-  createdAt DateTime @default(now())
-  board     Board    @relation(fields: [boardId], references: [id])
-  boardId   String
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
-  votes     Vote[]
-}
-
-model Feedback {
-  id        String   @id @default(cuid())
-  content   String
-  createdAt DateTime @default(now())
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  Int?
-}
-
-model Vote {
-  id         Int        @id @default(autoincrement())
-  createdAt  DateTime   @default(now())
-  user       User       @relation(fields: [userId], references: [id])
-  userId     Int
-  sticky     StickyNote @relation(fields: [stickyId], references: [id])
-  stickyId   String
-
-  @@unique([userId, stickyId]) // prevent double voting
+    @@index([name])
 }

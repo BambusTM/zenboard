@@ -7,14 +7,21 @@ import {Input} from "@/components/ui/input";
 import {Card} from "@/components/ui/card";
 import {Label} from "@/components/ui/label";
 import {api} from "@/trpc/react";
+import { useRouter } from "next/navigation";
 
 export default function AuthPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    const router = useRouter();
+
     const registerMutation = api.auth.register.useMutation({
-        onSuccess: (user) => console.log("Success:", user),
+        onSuccess: (user) => {
+            console.log("Success:", user)
+            localStorage.setItem("user", JSON.stringify(user));
+            router.push("/profile");
+        },
         onError: (error) => console.log("Error:", error),
     });
     const handleRegister = (e: FormEvent) => {
@@ -26,7 +33,11 @@ export default function AuthPage() {
     };
 
     const loginMutation = api.auth.login.useMutation({
-        onSuccess: (user) => console.log("Success:", user),
+        onSuccess: (user) => {
+            console.log("Success:", user)
+            localStorage.setItem("user", JSON.stringify(user));
+            router.push("/profile");
+        },
         onError: (error) => console.log("Error:", error),
     });
     const handleLogin = (e: FormEvent) => {
@@ -130,7 +141,7 @@ export default function AuthPage() {
                                         className="mt-1"
                                     />
                                 </div>
-                                <Button type="submit" className="mt-2">
+                                <Button type="submit" className="mt-2" disabled={registerMutation.isPaused}>
                                     Register
                                 </Button>
                             </form>

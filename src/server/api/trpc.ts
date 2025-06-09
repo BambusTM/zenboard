@@ -9,12 +9,14 @@ const prisma = new PrismaClient();
 export type Context = {
   db: PrismaClient;
   req?: NextRequest; // Stores the whole request
+  headers?: Headers;
 };
 
-export const createTRPCContext = async (opts?: { req?: NextRequest }): Promise<Context> => {
+export const createTRPCContext = async (opts?: { req?: NextRequest; headers?: Headers }): Promise<Context> => {
   return {
     db: prisma,
-    req: opts?.req
+    req: opts?.req,
+    headers: opts?.headers,
   };
 };
 

@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import { type Metadata } from "next";
 import { TRPCReactProvider } from "@/trpc/react";
+import {UserProvider} from "@/components/provider/UserProvider";
 
 export const metadata: Metadata = {
   title: "zenboard",
@@ -14,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+         <UserProvider>
+             <TRPCReactProvider>{children}</TRPCReactProvider>
+         </UserProvider>
       </body>
     </html>
   );

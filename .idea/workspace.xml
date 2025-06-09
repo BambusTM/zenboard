@@ -4,24 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="329fddb1-5316-40f2-91ef-cbf2f79433e3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/server/api/routers/auth.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/api/services/authService.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/context.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prettier.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/post.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/context/ToastProvider.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/api/routers/post.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/api/routers/post.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/db.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="329fddb1-5316-40f2-91ef-cbf2f79433e3" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,7 +60,7 @@
     "nodejs_interpreter_path": "C:/Users/sbjor/AppData/Roaming/JetBrains/WebStorm2025.1/node/versions/22.16.0/node",
     "nodejs_package_manager_path": "yarn",
     "prettierjs.PrettierConfiguration.Package": "C:\\Users\\sbjor\\repos\\zenboard\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "settings.editor.selected.configurable": "vcs.Git",
     "ts.external.directory.path": "C:\\Users\\sbjor\\repos\\zenboard\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -114,7 +97,8 @@
       <updated>1749042092114</updated>
       <workItem from="1749042093372" duration="3833000" />
       <workItem from="1749375421822" duration="1154000" />
-      <workItem from="1749398508884" duration="5889000" />
+      <workItem from="1749398508884" duration="6716000" />
+      <workItem from="1749458282068" duration="6246000" />
     </task>
     <servers />
   </component>

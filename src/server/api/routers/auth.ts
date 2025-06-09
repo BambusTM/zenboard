@@ -1,7 +1,7 @@
 import {z} from "zod";
 import {createTRPCRouter, publicProcedure} from "@/server/api/trpc";
-import type {RegisterSchema} from "@/lib/schemas/user";
-import {registerUser} from "@/server/api/services/authService";
+import {RegisterSchema} from "@/lib/schemas/authSchema";
+import {registerUser, loginUser} from "@/server/api/services/authService";
 
 export const authRouter = createTRPCRouter({
     register: publicProcedure
@@ -12,7 +12,7 @@ export const authRouter = createTRPCRouter({
 
     login: publicProcedure
         .input(z.object({email: z.string(), password: z.string()}))
-        .mutation(async ({ ctx, input }) => {
-            return {};
+        .mutation(async ({ input, ctx }) => {
+            return loginUser(input, ctx);
         }),
-})
+});

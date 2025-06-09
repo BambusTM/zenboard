@@ -2,15 +2,20 @@ import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 import { PrismaClient } from "@prisma/client";
+import type {NextRequest} from "next/server";
 
 const prisma = new PrismaClient();
 
 export type Context = {
   db: PrismaClient;
+  req?: NextRequest; // Stores the whole request
 };
 
-export const createTRPCContext = async (): Promise<Context> => {
-  return { db: prisma };
+export const createTRPCContext = async (opts?: { req?: NextRequest }): Promise<Context> => {
+  return {
+    db: prisma,
+    req: opts?.req
+  };
 };
 
 const t = initTRPC.context<Context>().create({

@@ -1021,15 +1021,15 @@
   dependencies:
     "@tanstack/query-core" "5.80.2"
 
-"@trpc/client@^11.0.0":
-  version "11.2.0"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-11.2.0.tgz#a2178bf376c78dc83d5a2dd862b426fadcefe380"
-  integrity sha512-uGehc0QvK3+UmTZb1KmIwvMLtRW0I5ykiYQHA1Yqa7yHPzpF9zw7mbwna6gqZAgjclt0/S6jwxAMJizoaP8uqQ==
+"@trpc/client@^11.3.1":
+  version "11.3.1"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-11.3.1.tgz#94a3adfa9f539aefd3f6eb6ac26cefab88fc0c59"
+  integrity sha512-UlLsUN7x8qD07FaGzdz/FG3K+kpaYowZkmVZ8R4Nlx1Yj01Kgr1Y+cGjtBdRpd+0l7uVylwDPmHA1OxYE6zHgA==
 
-"@trpc/react-query@^11.0.0":
-  version "11.2.0"
-  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-11.2.0.tgz#8d8475207bec73229d750820016b60bd7a190720"
-  integrity sha512-eVbvjUzvia7B+Xt3002YRlU2/u+jljtVdOTErT6ffMHC2T5ETop84oyqnsmXpMlnhT5y/We6v/KGpE4GUE2Zkw==
+"@trpc/react-query@^11.3.1":
+  version "11.3.1"
+  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-11.3.1.tgz#eebcbbc827f82864764085616f50b3fa45b66569"
+  integrity sha512-hVo+W7bRLo6QhhuV369IvCo/Ut0HWkpSprA4N8zSkcXwCf7dZN3BH/neKlTprFPyZWsLNFjRlDhymzwpaYwLAQ==
 
 "@trpc/server@^11.0.0":
   version "11.2.0"

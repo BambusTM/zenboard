@@ -1026,15 +1026,20 @@
   resolved "https://registry.yarnpkg.com/@trpc/client/-/client-11.3.1.tgz#94a3adfa9f539aefd3f6eb6ac26cefab88fc0c59"
   integrity sha512-UlLsUN7x8qD07FaGzdz/FG3K+kpaYowZkmVZ8R4Nlx1Yj01Kgr1Y+cGjtBdRpd+0l7uVylwDPmHA1OxYE6zHgA==
 
+"@trpc/next@^11.3.1":
+  version "11.3.1"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-11.3.1.tgz#24704044735db2423bbdd5b05b9e296c9e47d052"
+  integrity sha512-aauJ5qGgMLd4LgwckGurbWqzcd8TillGynVrrpmXAbeVPhifwruy42ilViC1SYupqBR6o7kRq2Ev9DczcPwsFQ==
+
 "@trpc/react-query@^11.3.1":
   version "11.3.1"
   resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-11.3.1.tgz#eebcbbc827f82864764085616f50b3fa45b66569"
   integrity sha512-hVo+W7bRLo6QhhuV369IvCo/Ut0HWkpSprA4N8zSkcXwCf7dZN3BH/neKlTprFPyZWsLNFjRlDhymzwpaYwLAQ==
 
-"@trpc/server@^11.0.0":
-  version "11.2.0"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-11.2.0.tgz#ca432c9c5cba20a3e6f9c96e08fabe22c85e3663"
-  integrity sha512-clESXvCT3rTRUavB3wjtmPDlbB+rayVPeaTeXEQVeQNdTrK5o6GnYfCdiJJSdQspUQAwkGgQFRnku5pckuISlw==
+"@trpc/server@^11.3.1":
+  version "11.3.1"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-11.3.1.tgz#cedea7c33bebe83812bd05f71ff38d04cce6a9c9"
+  integrity sha512-5Rjigjqwl9ieXL91ebZ1M4FPFXQJ5qipRyZuBoNzvqkq7Qlig+2F4WwLELyiTSNk2bGzdJTXJMKLhRE9Z56D8w==
 
 "@ts-morph/common@~0.19.0":
   version "0.19.0"
@@ -1501,6 +1506,14 @@ base64-js@^1.3.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
+
+bcrypt@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/bcrypt/-/bcrypt-6.0.0.tgz#86643fddde9bcd0ad91400b063003fa4b0312835"
+  integrity sha512-cU8v/EGSrnH+HnxV2z0J7/blxH8gq7Xh2JFT6Aroax7UohdmiJJlxApMxtKfuI7z68NvvVcmR78k2LbT6efhRg==
+  dependencies:
+    node-addon-api "^8.3.0"
+    node-gyp-build "^4.8.4"
 
 bl@^5.0.0:
   version "5.1.0"
@@ -3445,6 +3458,11 @@ next@^15.2.3:
     "@next/swc-win32-x64-msvc" "15.3.3"
     sharp "^0.34.1"
 
+node-addon-api@^8.3.0:
+  version "8.3.1"
+  resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-8.3.1.tgz#53bc8a4f8dbde3de787b9828059da94ba9fd4eed"
+  integrity sha512-lytcDEdxKjGJPTLEfW4mYMigRezMlyJY8W4wxJK8zE533Jlb8L8dRuObJFWg2P+AuOIxoCgKF+2Oq4d4Zd0OUA==
+
 node-domexception@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/node-domexception/-/node-domexception-1.0.0.tgz#6888db46a1f71c0b76b3f7555016b63fe64766e5"
@@ -3458,6 +3476,11 @@ node-fetch@^3.3.0:
     data-uri-to-buffer "^4.0.0"
     fetch-blob "^3.1.4"
     formdata-polyfill "^4.0.10"
+
+node-gyp-build@^4.8.4:
+  version "4.8.4"
+  resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.8.4.tgz#8a70ee85464ae52327772a90d66c6077a900cfc8"
+  integrity sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==
 
 node-releases@^2.0.19:
   version "2.0.19"

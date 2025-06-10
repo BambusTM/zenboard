@@ -1,4 +1,5 @@
 import {Button} from "@/components/ui/button";
+import Link from "next/link";
 
 interface NavbarProps {
     email?: string
@@ -13,7 +14,9 @@ export function Navbar(props: NavbarProps) {
                     {props.email ? (
                         <span className="text-muted-foreground">{props.email}</span>
                     ) : (
-                        <Button variant="outline">Login</Button>
+                        <Link href="/auth">
+                            <Button variant="outline">Login</Button>
+                        </Link>
                     )}
                 </div>
             </div>

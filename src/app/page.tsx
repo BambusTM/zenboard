@@ -15,14 +15,12 @@ export default async function Home() {
             <Link
               className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
               href="/auth"
-              target="_blank"
             >
               <h3 className="text-2xl font-bold">Login →</h3>
             </Link>
             <Link
               className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
               href="/profile"
-              target="_blank"
             >
               <h3 className="text-2xl font-bold">Profile →</h3>
             </Link>

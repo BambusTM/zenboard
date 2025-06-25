@@ -32,7 +32,7 @@ export async function loginUser(input: LoginInput, ctx: Context): Promise<LoginR
         };
     }
 
-    const { password, ...userWithoutPassword } = user;
+    const { ...userWithoutPassword } = user;
 
     return {
         success: true,

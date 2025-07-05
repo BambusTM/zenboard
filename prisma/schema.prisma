@@ -12,6 +12,7 @@ model User {
   email     String        @unique
   password  String
   createdAt DateTime      @default(now())
+  boards    Board[]
   sessions  SessionUser[]
   stickies  Sticky[]
   votes     Vote[]
@@ -19,51 +20,52 @@ model User {
 
 model Session {
   id           Int           @id @default(autoincrement())
-  joinCode     String        @unique // join code
+  joinCode     String        @unique
   createdAt    DateTime      @default(now())
   board        Board?
   participants SessionUser[]
 }
 
 model SessionUser {
-  id        Int     @id @default(autoincrement())
-  user      User    @relation(fields: [userId], references: [id])
+  id        Int      @id @default(autoincrement())
   userId    Int
-  session   Session @relation(fields: [sessionId], references: [id])
   sessionId Int
+  joinedAt  DateTime @default(now())
+  session   Session  @relation(fields: [sessionId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 
-  joinedAt DateTime @default(now())
-
-  @@unique([userId, sessionId]) // A user can join a session only once
+  @@unique([userId, sessionId])
 }
 
 model Board {
   id        Int      @id @default(autoincrement())
   name      String
-  session   Session  @relation(fields: [sessionId], references: [id])
-  sessionId Int      @unique
+  creatorId Int?
+  sessionId Int?     @unique
+  session   Session? @relation(fields: [sessionId], references: [id])
+  creator   User?    @relation(fields: [creatorId], references: [id])
   stickies  Sticky[]
 }
 
 model Sticky {
   id        Int      @id @default(autoincrement())
-  board     Board    @relation(fields: [boardId], references: [id])
   boardId   Int
-  author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
   content   String
   createdAt DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
+  board     Board    @relation(fields: [boardId], references: [id])
   votes     Vote[]
 }
 
 model Vote {
   id        Int      @id @default(autoincrement())
-  sticky    Sticky   @relation(fields: [stickyId], references: [id])
   stickyId  Int
-  user      User     @relation(fields: [userId], references: [id])
   userId    Int
-  value     Int // +1 for upvote, -1 for downvote
+  value     Int
   createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  sticky    Sticky   @relation(fields: [stickyId], references: [id])
 
-  @@unique([stickyId, userId]) // one vote per user per sticky
+  @@unique([stickyId, userId])
 }

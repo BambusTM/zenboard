@@ -1,50 +1,75 @@
 "use client";
 
-import React, {type FormEvent, useState} from "react";
+import React from "react";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {Card} from "@/components/ui/card";
-import {Label} from "@/components/ui/label";
 import {api} from "@/trpc/react";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {LoginFormSchema, type LoginFormType, RegisterFormSchema, type RegisterFormType} from "@/lib/schemas/authSchema";
 
 export default function AuthPage() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-
     const router = useRouter();
 
+    // Forms
+    const loginForm = useForm<LoginFormType>({
+        resolver: zodResolver(LoginFormSchema),
+        defaultValues: {
+            email: "",
+            password: "",
+        },
+    });
+
+    const registerForm = useForm<RegisterFormType>({
+        resolver: zodResolver(RegisterFormSchema),
+        defaultValues: {
+            email: "",
+            password: "",
+            confirmPassword: "",
+        },
+    });
+
+    // tRPC mutations
     const registerMutation = api.auth.register.useMutation({
         onSuccess: (user) => {
-            console.log("Success:", user)
+            console.log("Success:", user);
             localStorage.setItem("user", JSON.stringify(user));
-            router.push("/profile");
+            router.push("/board/create");
         },
-        onError: (error) => console.log("Error:", error),
+        onError: (error) => {
+            console.log("Error:", error);
+            registerForm.setError("root", { message: error.message });
+        },
     });
-    const handleRegister = (e: FormEvent) => {
-        e.preventDefault();
-        registerMutation.mutate({
-            email,
-            password
-        });
-    };
 
     const loginMutation = api.auth.login.useMutation({
         onSuccess: (user) => {
-            console.log("Success:", user)
+            console.log("Success:", user);
             localStorage.setItem("user", JSON.stringify(user));
             router.push("/profile");
         },
-        onError: (error) => console.log("Error:", error),
+        onError: (error) => {
+            console.log("Error:", error);
+            loginForm.setError("root", { message: error.message });
+        },
     });
-    const handleLogin = (e: FormEvent) => {
-        e.preventDefault();
+
+    // Form handlers
+    const handleLogin = (data: LoginFormType) => {
         loginMutation.mutate({
-            email,
-            password,
+            email: data.email,
+            password: data.password,
+        });
+    };
+
+    const handleRegister = (data: RegisterFormType) => {
+        registerMutation.mutate({
+            email: data.email,
+            password: data.password,
         });
     };
 
@@ -71,80 +96,123 @@ export default function AuthPage() {
 
                         <TabsContent value="login" className="mt-6 mb-4">
                             <h2 className="mb-4 text-xl font-semibold">Login</h2>
-                            <form onSubmit={handleLogin} className="flex flex-col gap-4">
-                                <div>
-                                    <Label htmlFor="login-email">Email</Label>
-                                    <Input
-                                        id="login-email"
-                                        type="email"
-                                        placeholder="Email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
-                                        className="mt-1"
+                            <Form {...loginForm}>
+                                <form onSubmit={loginForm.handleSubmit(handleLogin)} className="flex flex-col gap-4">
+                                    <FormField
+                                        control={loginForm.control}
+                                        name="email"
+                                        render={({field}) => (
+                                            <FormItem>
+                                                <FormLabel>Email</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="email"
+                                                        placeholder="Email"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage/>
+                                            </FormItem>
+                                        )}
                                     />
-                                </div>
-                                <div>
-                                    <Label htmlFor="login-password">Password</Label>
-                                    <Input
-                                        id="login-password"
-                                        type="password"
-                                        placeholder="Password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        required
-                                        className="mt-1"
+
+                                    <FormField
+                                        control={loginForm.control}
+                                        name="password"
+                                        render={({field}) => (
+                                            <FormItem>
+                                                <FormLabel>Password</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="password"
+                                                        placeholder="Password"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage/>
+                                            </FormItem>
+                                        )}
                                     />
-                                </div>
-                                <Button type="submit" className="mt-2">
-                                    Login
-                                </Button>
-                            </form>
+
+                                    <Button
+                                        type="submit"
+                                        className="mt-2"
+                                        disabled={loginMutation.isPending}
+                                    >
+                                        {loginMutation.isPending ? "Logging in..." : "Login"}
+                                    </Button>
+                                </form>
+                            </Form>
                         </TabsContent>
 
                         <TabsContent value="register" className="mt-6 mb-4">
                             <h2 className="mb-4 text-xl font-semibold">Register</h2>
-                            <form onSubmit={handleRegister} className="flex flex-col gap-4">
-                                <div>
-                                    <Label htmlFor="register-email">Email</Label>
-                                    <Input
-                                        id="register-email"
-                                        type="email"
-                                        placeholder="Email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
-                                        className="mt-1"
+                            <Form {...registerForm}>
+                                <form onSubmit={registerForm.handleSubmit(handleRegister)}
+                                      className="flex flex-col gap-4">
+                                    <FormField
+                                        control={registerForm.control}
+                                        name="email"
+                                        render={({field}) => (
+                                            <FormItem>
+                                                <FormLabel>Email</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="email"
+                                                        placeholder="Email"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage/>
+                                            </FormItem>
+                                        )}
                                     />
-                                </div>
-                                <div>
-                                    <Label htmlFor="register-password">Password</Label>
-                                    <Input
-                                        id="register-password"
-                                        type="password"
-                                        placeholder="Password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        required
-                                        className="mt-1"
+
+                                    <FormField
+                                        control={registerForm.control}
+                                        name="password"
+                                        render={({field}) => (
+                                            <FormItem>
+                                                <FormLabel>Password</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="password"
+                                                        placeholder="Password"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage/>
+                                            </FormItem>
+                                        )}
                                     />
-                                </div>
-                                <div>
-                                    <Label htmlFor="register-confirm">Confirm Password</Label>
-                                    <Input
-                                        id="register-confirm"
-                                        type="password"
-                                        placeholder="Confirm Password"
-                                        value={confirmPassword}
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
-                                        required
-                                        className="mt-1"
+
+                                    <FormField
+                                        control={registerForm.control}
+                                        name="confirmPassword"
+                                        render={({field}) => (
+                                            <FormItem>
+                                                <FormLabel>Confirm Password</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="password"
+                                                        placeholder="Confirm Password"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage/>
+                                            </FormItem>
+                                        )}
                                     />
-                                </div>
-                                <Button type="submit" className="mt-2" disabled={registerMutation.isPaused}>
-                                    Register
-                                </Button>
-                            </form>
+
+                                    <Button
+                                        type="submit"
+                                        className="mt-2"
+                                        disabled={registerMutation.isPending}
+                                    >
+                                        {registerMutation.isPending ? "Registering..." : "Register"}
+                                    </Button>
+                                </form>
+                            </Form>
                         </TabsContent>
                     </Tabs>
                 </Card>

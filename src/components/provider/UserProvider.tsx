@@ -5,7 +5,7 @@ import type { User } from "@prisma/client";
 
 const UserContext = createContext<User | null>(null);
 
-export function UserProvider({ children }: { children: ReactNode }) {
+export function UserProvider({ children }: Readonly<{ children: ReactNode }>) {
     const [user, setUser] = useState<User | null>(null);
 
     useEffect(() => {
@@ -16,6 +16,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
     return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 }
 
-export function useUser() {
+export function ZBUseUser() {
     return useContext(UserContext);
 }

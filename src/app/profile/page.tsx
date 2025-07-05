@@ -1,10 +1,10 @@
 "use client";
 
 import {Navbar} from "@/components/Navbar";
-import {useUser} from "@/components/provider/UserProvider";
+import {ZBUseUser} from "@/components/provider/UserProvider";
 
 export default function Home() {
-    const user = useUser();
+    const user = ZBUseUser();
 
     return (
         <main className="flex min-h-screen flex-col items-center">

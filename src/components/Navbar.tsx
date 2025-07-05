@@ -5,14 +5,18 @@ interface NavbarProps {
     email?: string
 }
 
-export function Navbar(props: NavbarProps) {
+export function Navbar(props: Readonly<NavbarProps>) {
     return (
         <header className="w-full border-b">
             <div className="container mx-auto flex items-center justify-between py-4 px-4">
-                <span className="text-lg font-semibold">ZEN | BOARD</span>
+                <Link href="/">
+                    <span className="text-lg font-semibold">ZEN | BOARD</span>
+                </Link>
                 <div>
                     {props.email ? (
-                        <span className="text-muted-foreground">{props.email}</span>
+                        <Link href="/profile">
+                            <span className="text-muted-foreground">{props.email}</span>
+                        </Link>
                     ) : (
                         <Link href="/auth">
                             <Button variant="outline">Login</Button>

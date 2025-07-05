@@ -19,7 +19,7 @@ model User {
 
 model Session {
   id           Int           @id @default(autoincrement())
-  code         String        @unique // join code
+  joinCode     String        @unique // join code
   createdAt    DateTime      @default(now())
   board        Board?
   participants SessionUser[]
@@ -39,6 +39,7 @@ model SessionUser {
 
 model Board {
   id        Int      @id @default(autoincrement())
+  name      String
   session   Session  @relation(fields: [sessionId], references: [id])
   sessionId Int      @unique
   stickies  Sticky[]

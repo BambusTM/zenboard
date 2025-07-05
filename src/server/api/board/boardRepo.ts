@@ -1,10 +1,16 @@
-import type {Board, Prisma, PrismaClient} from "@prisma/client";
+import type {Board, Prisma, PrismaClient, Session, SessionUser} from "@prisma/client";
+
+export type BoardWithSession = Board & {
+    session: (Session & {
+        participants: SessionUser[];
+    }) | null;
+};
 
 export const boardRepo = {
     create: async (
         db: PrismaClient,
         data: Prisma.BoardCreateInput
-    ): Promise<Board> => {
+    ): Promise<BoardWithSession> => {
         return db.board.create({
             data,
             include: {
@@ -71,6 +77,9 @@ export const boardRepo = {
         return db.board.findMany({
             where: {
                 OR: [
+                    {
+                        creatorId: userId,
+                    },
                     {
                         session: {
                             participants: {

@@ -1,15 +1,14 @@
 import type { CreateBoardType } from "@/lib/schemas/boardSchema";
-import type { Board } from "@prisma/client";
-import { boardRepo } from "./boardRepo";
+import {boardRepo, type BoardWithSession} from "./boardRepo";
 import { createSession } from "../session/sessionService";
 import type { Context } from "@/server/api/trpc";
+import type {Board} from "@prisma/client";
 
 export async function createBoard(
     input: CreateBoardType,
     ctx: Context,
     userId: number
-): Promise<Board> {
-
+): Promise<BoardWithSession> {
     if (input.createSession) {
         // Create board with session
         const session = await createSession(ctx, userId);
@@ -23,8 +22,10 @@ export async function createBoard(
     } else {
         return await boardRepo.createPrivate(ctx.db, {
             name: input.name,
-            creatorId: userId,
-        });
+            creator: {
+                connect: { id: userId }
+            }
+        }) as BoardWithSession;
     }
 }
 
@@ -39,10 +40,10 @@ export async function publishBoard(
         throw new Error("Board not found");
     }
 
-    // Check if user owns the board (you'll need to implement this logic)
-    // if (board.creatorId !== userId) {
-    //     throw new Error("Unauthorized");
-    // }
+    // Check if user owns the board
+    if (board.creatorId !== userId) {
+        throw new Error("Unauthorized");
+    }
 
     if (board.sessionId) {
         throw new Error("Board already has a session");
